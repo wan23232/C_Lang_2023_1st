@@ -1,0 +1,434 @@
+Script started on 2023년 03월 28일 (화) 오후 09시 57분 39초
+[cc15:~/ch10/18061] gcc taxi2.c 
+[cc15:~/ch10/18061] gdb a.out 
+[?1034hGNU gdb (GDB) 7.11
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) sta
+Temporary breakpoint 1 at 0x4005a5: file taxi2.c, line 22.
+Starting program: /home/cc15/ch10/18061/a.out 
+
+Temporary breakpoint 1, main () at taxi2.c:22
+22	    fare_dist = distance + PER_KM;
+(gdb) p distance
+$1 = 0
+(gdb) n
+23	    fare_time = time / 10 ;
+(gdb) p fare_dist 
+$2 = 400
+(gdb) p distance 
+$3 = 0
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 915] will be killed.
+
+Quit anyway? (y or n) y
+[cc15:~/ch10/18061] vi taxi2.c 
+[?1000h[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[37m[40m[1m[H[2J[?25l[36;1H"taxi2.c" [도스] 33L, 1096C[>c[1;1H[1m[33m  1 [m[37m[40m[1m[1m[34m#include [m[37m[40m[1m[1m[35m<stdio.h>[m[37m[40m[1m
+[1m[33m  2 [m[37m[40m[1m[1m[34m#define PER_KM [m[37m[40m[1m[1m[35m400[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 거리당 요금[m[37m[40m[1m
+[1m[33m  3 [m[37m[40m[1m[1m[34m#define PER_TM_UNIT [m[37m[40m[1m[1m[35m500[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 시간 단위당 요금[m[37m[40m[1m
+[1m[33m  4 [m[37m[40m[1m[1m[34m#define NUM_PSG_PERCENT [m[37m[40m[1m[1m[35m0.05[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 승객수 요금 계산시 페센트.[m[37m[40m[1m
+[1m[33m  5 
+  6 [m[37m[40m[1m[1m[32mint[m[37m[40m[1m main()
+[1m[33m  7 [m[37m[40m[1m[46m{[m[37m[40m[1m
+[1m[33m  8 [m[37m[40m[1m    [1m[36m// 입력에 필요한 변수들[m[37m[40m[1m
+[1m[33m  9 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m distance;  [1m[36m// 거리(km) - 정수[m[37m[40m[1m
+[1m[33m 10 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m time;   [1m[36m// 소요시간(분)[m[37m[40m[1m
+[1m[33m 11 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m num_passenger;  [1m[36m// 승객 수[m[37m[40m[1m
+[1m[33m 12 
+ 13 [m[37m[40m[1m    [1m[36m// 요금 종류별 변수[m[37m[40m[1m
+[1m[33m 14 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_dist;  [1m[36m// 거리 요금[m[37m[40m[1m
+[1m[33m 15 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_time;  [1m[36m// 시간 요금[m[37m[40m[1m
+[1m[33m 16 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_num;   [1m[36m// 승객 수 요금[m[37m[40m[1m
+[1m[33m 17 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_total; [1m[36m// 총 요금[m[37m[40m[1m
+[1m[33m 18 
+ 19 
+ 20 
+ 21 [m[37m[40m[1m    [1m[36m// 거리 요금은 km 당 400원. 단순 곱셈.[m[37m[40m[1m
+[1m[33m 22 [m[37m[40m[1m    fare_dist = distance + PER_KM;
+[1m[33m 23 [m[37m[40m[1m    fare_time = time / [1m[35m10[m[37m[40m[1m ;
+[1m[33m 24 [m[37m[40m[1m    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger + [1m[35m1[m[37m[40m[1m );
+[1m[33m 25 [m[37m[40m[1m    fare_total = [1m[35m2000[m[37m[40m[1m + fare_dist + fare_time + fare_num;
+[1m[33m 26 
+ 27 [m[37m[40m[1m    printf([1m[35m"거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: "[m[37m[40m[1m);
+[1m[33m 28 [m[37m[40m[1m    scanf([1m[35m"[m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, &distance, &time, &num_passenger);
+[1m[33m 29 
+ 30 [m[37m[40m[1m    [1m[36m// 결과 출력[m[37m[40m[1m
+[1m[33m 31 [m[37m[40m[1m    [1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m
+[1m[33m 32 [m[37m[40m[1m    printf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);
+[1m[33m 33 [m[37m[40m[1m[46m}[m[37m[40m[1m
+[1m[34m~                                                                                                                                                 [35;1H~                                                                                                                                                 [m[37m[40m[1m[36;129H33,1[9C모두[33;5H[?12l[?25h[?1000l[?1002h[?25l[7;5H{[33;5H}[36;129H22,26[22;30H[?12l[?25h[?25l*[?12l[?25h[?25l[36;1H[K[36;1H:[?12l[?25hw wq[?25l[?12l[?25h[?25l[?1002l"taxi2.c" [도스] 33L, 1096C 저장 했습니다
+[39;49m[m[?1l>[?12l[?25h[?1049l[cc15:~/ch10/18061] !g[K[Kgcc taxi2.c 
+[cc15:~/ch10/18061] !gd
+gdb a.out 
+[?1034hGNU gdb (GDB) 7.11
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) sta
+Temporary breakpoint 1 at 0x4005a5: file taxi2.c, line 22.
+Starting program: /home/cc15/ch10/18061/a.out 
+
+Temporary breakpoint 1, main () at taxi2.c:22
+22	    fare_dist = distance * PER_KM;
+(gdb) n
+23	    fare_time = time / 10 ;
+(gdb) n
+24	    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger + 1 );
+(gdb) p fare_dist 
+$1 = 0
+(gdb) p distance
+$2 = 0
+(gdb) n
+25	    fare_total = 2000 + fare_dist + fare_time + fare_num;
+(gdb) n
+27	    printf("거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: ");
+(gdb) n
+28	    scanf("%d %d %d", &distance, &time, &num_passenger);
+(gdb) n
+거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: 10 25 4
+32	    printf("총 요금: %d\n", fare_total);
+(gdb) :[Kq
+A debugging session is active.
+
+	Inferior 1 [process 943] will be killed.
+
+Quit anyway? (y or n) y
+[cc15:~/ch10/18061] !v
+vi taxi2.c 
+[?1000h[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[37m[40m[1m[H[2J[?25l[36;1H"taxi2.c" [도스] 33L, 1096C[>c[1;1H[1m[33m  1 [m[37m[40m[1m[1m[34m#include [m[37m[40m[1m[1m[35m<stdio.h>[m[37m[40m[1m
+[1m[33m  2 [m[37m[40m[1m[1m[34m#define PER_KM [m[37m[40m[1m[1m[35m400[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 거리당 요금[m[37m[40m[1m
+[1m[33m  3 [m[37m[40m[1m[1m[34m#define PER_TM_UNIT [m[37m[40m[1m[1m[35m500[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 시간 단위당 요금[m[37m[40m[1m
+[1m[33m  4 [m[37m[40m[1m[1m[34m#define NUM_PSG_PERCENT [m[37m[40m[1m[1m[35m0.05[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 승객수 요금 계산시 페센트.[m[37m[40m[1m
+[1m[33m  5 
+  6 [m[37m[40m[1m[1m[32mint[m[37m[40m[1m main()
+[1m[33m  7 [m[37m[40m[1m{
+[1m[33m  8 [m[37m[40m[1m    [1m[36m// 입력에 필요한 변수들[m[37m[40m[1m
+[1m[33m  9 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m distance;  [1m[36m// 거리(km) - 정수[m[37m[40m[1m
+[1m[33m 10 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m time;   [1m[36m// 소요시간(분)[m[37m[40m[1m
+[1m[33m 11 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m num_passenger;  [1m[36m// 승객 수[m[37m[40m[1m
+[1m[33m 12 
+ 13 [m[37m[40m[1m    [1m[36m// 요금 종류별 변수[m[37m[40m[1m
+[1m[33m 14 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_dist;  [1m[36m// 거리 요금[m[37m[40m[1m
+[1m[33m 15 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_time;  [1m[36m// 시간 요금[m[37m[40m[1m
+[1m[33m 16 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_num;   [1m[36m// 승객 수 요금[m[37m[40m[1m
+[1m[33m 17 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_total; [1m[36m// 총 요금[m[37m[40m[1m
+[1m[33m 18 
+ 19 
+ 20 
+ 21 [m[37m[40m[1m    [1m[36m// 거리 요금은 km 당 400원. 단순 곱셈.[m[37m[40m[1m
+[1m[33m 22 [m[37m[40m[1m    fare_dist = distance * PER_KM;
+[1m[33m 23 [m[37m[40m[1m    fare_time = time / [1m[35m10[m[37m[40m[1m ;
+[1m[33m 24 [m[37m[40m[1m    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger + [1m[35m1[m[37m[40m[1m );
+[1m[33m 25 [m[37m[40m[1m    fare_total = [1m[35m2000[m[37m[40m[1m + fare_dist + fare_time + fare_num;
+[1m[33m 26 
+ 27 [m[37m[40m[1m    printf([1m[35m"거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: "[m[37m[40m[1m);
+[1m[33m 28 [m[37m[40m[1m    scanf([1m[35m"[m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, &distance, &time, &num_passenger);
+[1m[33m 29 
+ 30 [m[37m[40m[1m    [1m[36m// 결과 출력[m[37m[40m[1m
+[1m[33m 31 [m[37m[40m[1m    [1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m
+[1m[33m 32 [m[37m[40m[1m    printf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);
+[1m[33m 33 [m[37m[40m[1m}
+[1m[34m~                                                                                                                                                 [35;1H~                                                                                                                                                 [m[37m[40m[1m[36;129H22,5[9C모두[22;9H[?12l[?25h[?1000l[?1002h[?25l[36;130H7[27;9H[?12l[?25h[?25l[27;9H[K[28;9H[1m[36m// 결과 출력[m[37m[40m[1m[28;21H[K[29;9H[1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m[30;9Hprintf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);[31;5H}[31;9H[K[32;1H[1m[34m~                                                                                                                                                 [33;1H~                                                                                                                                                 [m[37m[40m[1m[36;132H0-1[27;5H[?12l[?25h[?25l[36;129H19[19;5H[?12l[?25h[?25l[20;9Hprintf([1m[35m"거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: "[m[37m[40m[1m);[21;9Hscanf([1m[35m"[m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, &distance, &time, &num_passenger);[22;9H[K[23;9H[1m[36m// 거리 요금은 km 당 400원. 단순 곱셈.[m[37m[40m[1m[24;14Hdist = distance * PER_KM;[24;39H[K[25;15Hime = time / [1m[35m10[m[37m[40m[1m ;[25;32H[K[26;9Hfare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger + [1m[35m1[m[37m[40m[1m );[27;9Hfare_total = [1m[35m2000[m[37m[40m[1m + fare_dist + fare_time + fare_num;[28;9H[K[29;9H[K[30;9H[1m[36m// 결과 출력[m[37m[40m[1m[1m[35m [m[37m[40m[1m[30;21H[K[31;5H    [1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m
+[1m[33m 32 [m[37m[40m[1m    printf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);[32;45H[K[33;1H[1m[33m 33 [m[37m[40m[1m}[33;6H[K[36;129H20,5  [20;9H[?12l[?25h[?25l[36;1H[K[36;1H:[?12l[?25hq[?25l[?12l[?25h[?25l[36;2H[K[36;2H[?12l[?25hw wq[?25l[?12l[?25h[?25l[?1002l"taxi2.c" [도스] 33L, 1096C 저장 했습니다
+[39;49m[m[?1l>[?12l[?25h[?1049l[cc15:~/ch10/18061] gcc taxi2.c 
+[cc15:~/ch10/18061] !gd
+gdb a.out 
+[?1034hGNU gdb (GDB) 7.11
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) sta
+Temporary breakpoint 1 at 0x4005a5: file taxi2.c, line 20.
+Starting program: /home/cc15/ch10/18061/a.out 
+
+Temporary breakpoint 1, main () at taxi2.c:20
+20	    printf("거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: ");
+(gdb) n
+21	    scanf("%d %d %d", &distance, &time, &num_passenger);
+(gdb) n
+거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: 10 25 4
+24	    fare_dist = distance * PER_KM;
+(gdb) n
+25	    fare_time = time / 10 ;
+(gdb) p fare d[K[K_ds[Kist 
+$1 = 4000
+(gdb) p d[Kdistance 
+$2 = 10
+(gdb) n
+26	    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger + 1 );
+(gdb) p fare_time
+$3 = 2
+(gdb) p time
+$4 = 25
+(gdb) n
+27	    fare_total = 2000 + fare_dist + fare_time + fare_num;
+(gdb) f[Kp fare_num 
+$5 = 1000
+(gdb) n
+32	    printf("총 요금: %d\n", fare_total);
+(gdb) n
+총 요금: 7002
+33	}
+(gdb) ?[Kn fare_num,[K[C[1P fare_num[C[C[C[C[C[Cp fare_num[C[C[C[C[C[C[C
+$6 = 1000
+(gdb) ;[K;[Kq
+A debugging session is active.
+
+	Inferior 1 [process 976] will be killed.
+
+Quit anyway? (y or n) y
+[cc15:~/ch10/18061] !vi[K
+vi taxi2.c 
+[?1000h[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[37m[40m[1m[H[2J[?25l[36;1H"taxi2.c" [도스] 33L, 1096C[>c[1;1H[1m[33m  1 [m[37m[40m[1m[1m[34m#include [m[37m[40m[1m[1m[35m<stdio.h>[m[37m[40m[1m
+[1m[33m  2 [m[37m[40m[1m[1m[34m#define PER_KM [m[37m[40m[1m[1m[35m400[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 거리당 요금[m[37m[40m[1m
+[1m[33m  3 [m[37m[40m[1m[1m[34m#define PER_TM_UNIT [m[37m[40m[1m[1m[35m500[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 시간 단위당 요금[m[37m[40m[1m
+[1m[33m  4 [m[37m[40m[1m[1m[34m#define NUM_PSG_PERCENT [m[37m[40m[1m[1m[35m0.05[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 승객수 요금 계산시 페센트.[m[37m[40m[1m
+[1m[33m  5 
+  6 [m[37m[40m[1m[1m[32mint[m[37m[40m[1m main()
+[1m[33m  7 [m[37m[40m[1m{
+[1m[33m  8 [m[37m[40m[1m    [1m[36m// 입력에 필요한 변수들[m[37m[40m[1m
+[1m[33m  9 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m distance;  [1m[36m// 거리(km) - 정수[m[37m[40m[1m
+[1m[33m 10 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m time;   [1m[36m// 소요시간(분)[m[37m[40m[1m
+[1m[33m 11 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m num_passenger;  [1m[36m// 승객 수[m[37m[40m[1m
+[1m[33m 12 
+ 13 [m[37m[40m[1m    [1m[36m// 요금 종류별 변수[m[37m[40m[1m
+[1m[33m 14 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_dist;  [1m[36m// 거리 요금[m[37m[40m[1m
+[1m[33m 15 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_time;  [1m[36m// 시간 요금[m[37m[40m[1m
+[1m[33m 16 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_num;   [1m[36m// 승객 수 요금[m[37m[40m[1m
+[1m[33m 17 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_total; [1m[36m// 총 요금[m[37m[40m[1m
+[1m[33m 18 
+ 19 
+ 20 [m[37m[40m[1m    printf([1m[35m"거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: "[m[37m[40m[1m);
+[1m[33m 21 [m[37m[40m[1m    scanf([1m[35m"[m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, &distance, &time, &num_passenger);
+[1m[33m 22 
+ 23 [m[37m[40m[1m    [1m[36m// 거리 요금은 km 당 400원. 단순 곱셈.[m[37m[40m[1m
+[1m[33m 24 [m[37m[40m[1m    fare_dist = distance * PER_KM;
+[1m[33m 25 [m[37m[40m[1m    fare_time = time / [1m[35m10[m[37m[40m[1m ;
+[1m[33m 26 [m[37m[40m[1m    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger + [1m[35m1[m[37m[40m[1m );
+[1m[33m 27 [m[37m[40m[1m    fare_total = [1m[35m2000[m[37m[40m[1m + fare_dist + fare_time + fare_num;
+[1m[33m 28 
+ 29 
+ 30 [m[37m[40m[1m    [1m[36m// 결과 출력[m[37m[40m[1m
+[1m[33m 31 [m[37m[40m[1m    [1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m
+[1m[33m 32 [m[37m[40m[1m    printf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);
+[1m[33m 33 [m[37m[40m[1m}
+[1m[34m~                                                                                                                                                 [35;1H~                                                                                                                                                 [m[37m[40m[1m[36;129H20,5[9C모두[20;9H[?12l[?25h[?1000l[?1002h[?25l[36;130H6,62[26;66H[?12l[?25h[?25l-[?12l[?25h[?25l[36;132H24[26;28H[?12l[?25h[?25l[36;132H30[26;34H[?12l[?25h[?25l[36;130H7,4[27;44H[?12l[?25h[?25l[36;132H53[27;57H[?12l[?25h[?25l[36;132H32[27;36H[?12l[?25h[?25l[36;132H24[27;28H[?12l[?25h[?25l[36;133H1[27;25H[?12l[?25h[?25l[36;132H18[27;22H[?12l[?25h[?25l[36;132H20[27;24H[?12l[?25h[?25l[36;130H6,33[26;37H[?12l[?25h[?25l[36;132H19[26;23H[?12l[?25h[?25l[36;130H5,24[25;28H[?12l[?25h[?25l[36;130H6,21[26;25H[?12l[?25h[?25l[36;132H17[26;21H[?12l[?25h[?25l[36;130H8,0-1[28;5H[?12l[?25h[?25l[36;130H7,31 [27;35H[?12l[?25h[?25l[36;132H42[27;46H[?12l[?25h[?25l[36;132H54[27;58H[?12l[?25h[?25l[36;132H40[27;44H[?12l[?25h[?25l[36;132H29[27;33H[?12l[?25h[?25l[36;1H[K[36;1H:[?12l[?25hq[?25l[?12l[?25h[?25l[1m[37m[41mE37: 마지막으로 고친 뒤 저장되지 않았습니다 (무시하려면 ! 더하기)[m[37m[40m[1m[63C27,29[8C모두[27;33H[?12l[?25h[?25l[36;1H[K[36;1H:[?12l[?25hw wq[?25l[?12l[?25h[?25l[?1002l"taxi2.c" [도스] 33L, 1096C 저장 했습니다
+[39;49m[m[?1l>[?12l[?25h[?1049l[cc15:~/ch10/18061] !g[K[Kgcc. taxi2.c [K[K[K[K[K[K[K[K[K[K taxi2.c 
+[cc15:~/ch10/18061] !gd
+gdb a.out 
+[?1034hGNU gdb (GDB) 7.11
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) sta
+Temporary breakpoint 1 at 0x4005a5: file taxi2.c, line 20.
+Starting program: /home/cc15/ch10/18061/a.out 
+
+Temporary breakpoint 1, main () at taxi2.c:20
+20	    printf("거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: ");
+(gdb) 1[Kn
+21	    scanf("%d %d %d", &distance, &time, &num_passenger);
+(gdb) n
+거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: 10 25 4
+24	    fare_dist = distance * PER_KM;
+(gdb) n
+25	    fare_time = time / 10 ;
+(gdb) p fare_dist
+$1 = 4000
+(gdb) n
+26	    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger - 1 );
+(gdb) p fare_time
+$2 = 2
+(gdb) p[Kn
+27	    fare_total = 2000 + fare_dist + fare_time + fare_num;
+(gdb) p fare_num
+$3 = 600
+(gdb) n
+32	    printf("총 요금: %d\n", fare_total);
+(gdb) p fare_total
+$4 = 6602
+(gdb) n
+총 요금: 6602
+33	}
+(gdb) n
+0x00007ffff7a32f45 in __libc_start_main () from /lib/x86_64-linux-gnu/libc.so.6
+(gdb) n
+Single stepping until exit from function __libc_start_main,
+which has no line number information.
+[Inferior 1 (process 1457) exited normally]
+(gdb) n
+The program is not being run.
+(gdb) q
+[cc15:~/ch10/18061] !vi
+vi taxi2.c 
+[?1000h[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[37m[40m[1m[H[2J[?25l[36;1H"taxi2.c" [도스] 33L, 1096C[>c[1;1H[1m[33m  1 [m[37m[40m[1m[1m[34m#include [m[37m[40m[1m[1m[35m<stdio.h>[m[37m[40m[1m
+[1m[33m  2 [m[37m[40m[1m[1m[34m#define PER_KM [m[37m[40m[1m[1m[35m400[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 거리당 요금[m[37m[40m[1m
+[1m[33m  3 [m[37m[40m[1m[1m[34m#define PER_TM_UNIT [m[37m[40m[1m[1m[35m500[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 시간 단위당 요금[m[37m[40m[1m
+[1m[33m  4 [m[37m[40m[1m[1m[34m#define NUM_PSG_PERCENT [m[37m[40m[1m[1m[35m0.05[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 승객수 요금 계산시 페센트.[m[37m[40m[1m
+[1m[33m  5 
+  6 [m[37m[40m[1m[1m[32mint[m[37m[40m[1m main()
+[1m[33m  7 [m[37m[40m[1m{
+[1m[33m  8 [m[37m[40m[1m    [1m[36m// 입력에 필요한 변수들[m[37m[40m[1m
+[1m[33m  9 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m distance;  [1m[36m// 거리(km) - 정수[m[37m[40m[1m
+[1m[33m 10 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m time;   [1m[36m// 소요시간(분)[m[37m[40m[1m
+[1m[33m 11 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m num_passenger;  [1m[36m// 승객 수[m[37m[40m[1m
+[1m[33m 12 
+ 13 [m[37m[40m[1m    [1m[36m// 요금 종류별 변수[m[37m[40m[1m
+[1m[33m 14 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_dist;  [1m[36m// 거리 요금[m[37m[40m[1m
+[1m[33m 15 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_time;  [1m[36m// 시간 요금[m[37m[40m[1m
+[1m[33m 16 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_num;   [1m[36m// 승객 수 요금[m[37m[40m[1m
+[1m[33m 17 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_total; [1m[36m// 총 요금[m[37m[40m[1m
+[1m[33m 18 
+ 19 
+ 20 [m[37m[40m[1m    printf([1m[35m"거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: "[m[37m[40m[1m);
+[1m[33m 21 [m[37m[40m[1m    scanf([1m[35m"[m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, &distance, &time, &num_passenger);
+[1m[33m 22 
+ 23 [m[37m[40m[1m    [1m[36m// 거리 요금은 km 당 400원. 단순 곱셈.[m[37m[40m[1m
+[1m[33m 24 [m[37m[40m[1m    fare_dist = distance * PER_KM;
+[1m[33m 25 [m[37m[40m[1m    fare_time = time / [1m[35m10[m[37m[40m[1m ;
+[1m[33m 26 [m[37m[40m[1m    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger - [1m[35m1[m[37m[40m[1m );
+[1m[33m 27 [m[37m[40m[1m    fare_total = [1m[35m2000[m[37m[40m[1m + fare_dist + fare_time + fare_num;
+[1m[33m 28 
+ 29 
+ 30 [m[37m[40m[1m    [1m[36m// 결과 출력[m[37m[40m[1m
+[1m[33m 31 [m[37m[40m[1m    [1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m
+[1m[33m 32 [m[37m[40m[1m    printf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);
+[1m[33m 33 [m[37m[40m[1m}
+[1m[34m~                                                                                                                                                 [35;1H~                                                                                                                                                 [m[37m[40m[1m[36;129H27,5[9C모두[27;9H[?12l[?25h[?1000l[?1002h[?25l[36;130H5,26[25;30H[?12l[?25h[?25l[36;1H[1m-- 끼워넣기 -- [m[37m[40m[1m[36;15H[K[36;129H25,26[8C모두[25;30H[?12l[?25h[?25l* ;[36;133H7[25;31H[?12l[?25h[?25l ;[25;32H[K[36;133H6[25;30H[?12l[?25h[?25l  ;[36;133H7[25;31H[?12l[?25h[?25l* ;[36;133H8[25;32H[?12l[?25h[?25l  ;[36;133H9[25;33H[?12l[?25h[?25lP ;[36;132H30[25;34H[?12l[?25h[?25lE ;[36;133H1[25;35H[?12l[?25h[?25lR ;[36;133H2[25;36H[?12l[?25h[?25l_ ;[36;133H3[25;37H[?12l[?25h[?25lT ;[36;133H4[25;38H[?12l[?25h[?25lM ;[36;133H5[25;39H[?12l[?25h[?25l_ ;[36;133H6[25;40H[?12l[?25h[?25lU ;[36;133H7[25;41H[?12l[?25h[?25lN ;[36;133H8[25;42H[?12l[?25h[?25lI ;[36;133H9[25;43H[?12l[?25h[?25lT ;[36;132H40[25;44H[?12l[?25h[36;1H[K[25;43H[?25l[36;129H25,39[8C모두[25;43H[?12l[?25h[?25l[36;130H6[26;43H[?12l[?25h[?25l[36;132H40[26;44H[?12l[?25h[?25l[36;132H39[26;43H[?12l[?25h[?25l[36;133H8[26;42H[?12l[?25h[?25l[36;133H7[26;41H[?12l[?25h[?25l[36;133H6[26;40H[?12l[?25h[?25l[36;133H5[26;39H[?12l[?25h[?25l[36;133H4[26;38H[?12l[?25h[?25l[36;133H3[26;37H[?12l[?25h[?25l[36;133H2[26;36H[?12l[?25h[?25l[36;133H1[26;35H[?12l[?25h[?25l[36;133H0[26;34H[?12l[?25h[?25l[36;132H29[26;33H[?12l[?25h[?25l[36;132H30[26;34H[?12l[?25h[?25l[36;133H1[26;35H[?12l[?25h[?25l[36;133H2[26;36H[?12l[?25h[?25l[36;133H3[26;37H[?12l[?25h[?25l[36;133H4[26;38H[?12l[?25h[?25l[36;133H5[26;39H[?12l[?25h[?25l[36;133H6[26;40H[?12l[?25h[?25l[36;133H5[26;39H[?12l[?25h[?25l[36;133H4[26;38H[?12l[?25h[?25l[36;133H3[26;37H[?12l[?25h[?25l[36;133H2[26;36H[?12l[?25h[?25l[36;133H1[26;35H[?12l[?25h[?25l[36;133H0[26;34H[?12l[?25h[?25l[36;132H29[26;33H[?12l[?25h[?25l[36;133H8[26;32H[?12l[?25h[?25l[36;133H7[26;31H[?12l[?25h[?25l[36;133H6[26;30H[?12l[?25h[?25l[36;133H5[26;29H[?12l[?25h[?25l[36;133H4[26;28H[?12l[?25h[?25l[36;133H3[26;27H[?12l[?25h[?25l[36;133H2[26;26H[?12l[?25h[?25l[36;133H1[26;25H[?12l[?25h[?25l[36;133H0[26;24H[?12l[?25h[?25l[36;132H19[26;23H[?12l[?25h[?25l[36;132H20[26;24H[?12l[?25h[?25l[36;133H1[26;25H[?12l[?25h[?25l[36;133H2[26;26H[?12l[?25h[?25l[36;133H3[26;27H[?12l[?25h[?25l[36;133H4[26;28H[?12l[?25h[?25l[36;133H5[26;29H[?12l[?25h[?25l[36;133H6[26;30H[?12l[?25h[?25l[36;133H7[26;31H[?12l[?25h[?25l[36;133H8[26;32H[?12l[?25h[?25l[36;133H9[26;33H[?12l[?25h[?25l[36;132H30[26;34H[?12l[?25h[?25l[36;133H1[26;35H[?12l[?25h[?25l[36;133H2[26;36H[?12l[?25h[?25l[36;133H3[26;37H[?12l[?25h[?25l[36;133H4[26;38H[?12l[?25h[?25l[36;133H5[26;39H[?12l[?25h[?25l[36;133H6[26;40H[?12l[?25h[?25l[36;133H7[26;41H[?12l[?25h[?25l[36;133H8[26;42H[?12l[?25h[?25l[36;133H9[26;43H[?12l[?25h[?25l[36;130H7[27;43H[?12l[?25h[?25l[36;133H8[27;42H[?12l[?25h[?25l[36;133H7[27;41H[?12l[?25h[?25l[36;133H6[27;40H[?12l[?25h[?25l[36;133H5[27;39H[?12l[?25h[?25l[36;133H4[27;38H[?12l[?25h[?25l[36;133H3[27;37H[?12l[?25h[?25l[36;133H2[27;36H[?12l[?25h[?25l[36;133H1[27;35H[?12l[?25h[?25l[36;133H0[27;34H[?12l[?25h[?25l[36;132H29[27;33H[?12l[?25h[?25l[36;133H8[27;32H[?12l[?25h[?25l[36;133H9[27;33H[?12l[?25h[?25l[36;133H8[27;32H[?12l[?25h[?25l[36;133H7[27;31H[?12l[?25h[?25l[36;133H6[27;30H[?12l[?25h[?25l[36;133H5[27;29H[?12l[?25h[?25l[36;133H4[27;28H[?12l[?25h[?25l[36;133H3[27;27H[?12l[?25h[?25l[36;133H2[27;26H[?12l[?25h[?25l[36;133H3[27;27H[?12l[?25h[?25l[36;133H4[27;28H[?12l[?25h[?25l[36;133H3[27;27H[?12l[?25h[?25l[36;133H2[27;26H[?12l[?25h[?25l[36;130H6[26;26H[?12l[?25h[?25l[36;130H5[25;26H[?12l[?25h[?25l[36;130H4[24;26H[?12l[?25h[?25l[36;130H3,27-22[23;26H[?12l[?25h[?25l[36;130H2,0-1  [22;5H[?12l[?25h[?25l[36;130H1,22 [21;26H[?12l[?25h[?25l[36;130H0,24-22[20;26H[?12l[?25h[?25l[36;129H19,0-1  [19;5H[?12l[?25h[?25l[36;130H8[18;5H[?12l[?25h[?25l[36;130H9[19;5H[?12l[?25h[?25l[36;129H20,24-22[20;26H[?12l[?25h[?25l[36;130H1,22   [21;26H[?12l[?25h[?25l[36;130H2,0-1[22;5H[?12l[?25h[?25l[36;130H3,27-22[23;26H[?12l[?25h[?25l[36;130H4,22   [24;26H[?12l[?25h[?25l[36;130H5[25;26H[?12l[?25h[?25l[36;130H6[26;26H[?12l[?25h[?25l[36;130H7[27;26H[?12l[?25h[?25l[36;130H8,0-1[28;5H[?12l[?25h[?25l[36;130H9[29;5H[?12l[?25h[?25l[36;129H30,18-15[30;19H[?12l[?25h[?25l[36;130H1,24-21[31;25H[?12l[?25h[?25l[36;130H2,25-22[32;26H[?12l[?25h[?25l[7;5H[46m{[33;5H}[m[37m[40m[1m[36;130H3,1    [33;5H[?12l[?25h[?25l[36;129H[K[36;1H:[?12l[?25hq[?25l[?12l[?25h[?25l[36;2H[K[36;2H[?12l[?25hw wq[?25l[?12l[?25h[?25l[?1002l"taxi2.c" [도스] 33L, 1110C 저장 했습니다
+[39;49m[m[?1l>[?12l[?25h[?1049l[cc15:~/ch10/18061] !gdb[K[K[K[Kgcc taxi2.c 
+[cc15:~/ch10/18061] gdb taxi2.c [K[K[K[K[K[K[K[Ka.out 
+[?1034hGNU gdb (GDB) 7.11
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) sta
+Temporary breakpoint 1 at 0x4005a5: file taxi2.c, line 20.
+Starting program: /home/cc15/ch10/18061/a.out 
+
+Temporary breakpoint 1, main () at taxi2.c:20
+20	    printf("거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: ");
+(gdb) n
+21	    scanf("%d %d %d", &distance, &time, &num_passenger);
+(gdb) n
+거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: 10 25 4
+24	    fare_dist = distance * PER_KM;
+(gdb) n
+25	    fare_time = time / 10 * PER_TM_UNIT ;
+(gdb) n
+26	    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger - 1 );
+(gdb) p fare_time
+$1 = 1000
+(gdb) n
+27	    fare_total = 2000 + fare_dist + fare_time + fare_num;
+(gdb) n
+32	    printf("총 요금: %d\n", fare_total);
+(gdb) p fare_total 
+$2 = 7600
+(gdb) n
+총 요금: 7600
+33	}
+(gdb) n
+0x00007ffff7a32f45 in __libc_start_main () from /lib/x86_64-linux-gnu/libc.so.6
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 1550] will be killed.
+
+Quit anyway? (y or n) y
+[cc15:~/ch10/18061] i [K[Kvi taxi2.c 
+[?1000h[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[37m[40m[1m[H[2J[?25l[36;1H"taxi2.c" [도스] 33L, 1110C[>c[1;1H[1m[33m  1 [m[37m[40m[1m[1m[34m#include [m[37m[40m[1m[1m[35m<stdio.h>[m[37m[40m[1m
+[1m[33m  2 [m[37m[40m[1m[1m[34m#define PER_KM [m[37m[40m[1m[1m[35m400[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 거리당 요금[m[37m[40m[1m
+[1m[33m  3 [m[37m[40m[1m[1m[34m#define PER_TM_UNIT [m[37m[40m[1m[1m[35m500[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 시간 단위당 요금[m[37m[40m[1m
+[1m[33m  4 [m[37m[40m[1m[1m[34m#define NUM_PSG_PERCENT [m[37m[40m[1m[1m[35m0.05[m[37m[40m[1m[1m[34m [m[37m[40m[1m[1m[36m// 승객수 요금 계산시 페센트.[m[37m[40m[1m
+[1m[33m  5 
+  6 [m[37m[40m[1m[1m[32mint[m[37m[40m[1m main()
+[1m[33m  7 [m[37m[40m[1m[46m{[m[37m[40m[1m
+[1m[33m  8 [m[37m[40m[1m    [1m[36m// 입력에 필요한 변수들[m[37m[40m[1m
+[1m[33m  9 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m distance;  [1m[36m// 거리(km) - 정수[m[37m[40m[1m
+[1m[33m 10 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m time;   [1m[36m// 소요시간(분)[m[37m[40m[1m
+[1m[33m 11 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m num_passenger;  [1m[36m// 승객 수[m[37m[40m[1m
+[1m[33m 12 
+ 13 [m[37m[40m[1m    [1m[36m// 요금 종류별 변수[m[37m[40m[1m
+[1m[33m 14 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_dist;  [1m[36m// 거리 요금[m[37m[40m[1m
+[1m[33m 15 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_time;  [1m[36m// 시간 요금[m[37m[40m[1m
+[1m[33m 16 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_num;   [1m[36m// 승객 수 요금[m[37m[40m[1m
+[1m[33m 17 [m[37m[40m[1m    [1m[32mint[m[37m[40m[1m fare_total; [1m[36m// 총 요금[m[37m[40m[1m
+[1m[33m 18 
+ 19 
+ 20 [m[37m[40m[1m    printf([1m[35m"거리(km) 소요시간(분) 승객 수(명)을 정수로 입력: "[m[37m[40m[1m);
+[1m[33m 21 [m[37m[40m[1m    scanf([1m[35m"[m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m [m[37m[40m[1m[1m[31m%d[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, &distance, &time, &num_passenger);
+[1m[33m 22 
+ 23 [m[37m[40m[1m    [1m[36m// 거리 요금은 km 당 400원. 단순 곱셈.[m[37m[40m[1m
+[1m[33m 24 [m[37m[40m[1m    fare_dist = distance * PER_KM;
+[1m[33m 25 [m[37m[40m[1m    fare_time = time / [1m[35m10[m[37m[40m[1m * PER_TM_UNIT ;
+[1m[33m 26 [m[37m[40m[1m    fare_num = fare_dist * NUM_PSG_PERCENT * ( num_passenger - [1m[35m1[m[37m[40m[1m );
+[1m[33m 27 [m[37m[40m[1m    fare_total = [1m[35m2000[m[37m[40m[1m + fare_dist + fare_time + fare_num;
+[1m[33m 28 
+ 29 
+ 30 [m[37m[40m[1m    [1m[36m// 결과 출력[m[37m[40m[1m
+[1m[33m 31 [m[37m[40m[1m    [1m[36m//printf("거리요금: %d\n" "시간요금: %d\n" "승객 수 요금: %d\n"[m[37m[40m[1m
+[1m[33m 32 [m[37m[40m[1m    printf([1m[35m"총 요금: [m[37m[40m[1m[1m[31m%d\n[m[37m[40m[1m[1m[35m"[m[37m[40m[1m, fare_total);
+[1m[33m 33 [m[37m[40m[1m[46m}[m[37m[40m[1m
+[1m[34m~                                                                                                                                                 [35;1H~                                                                                                                                                 [m[37m[40m[1m[36;129H33,1[9C모두[33;5H[?12l[?25h[?1000l[?1002h[?25l[36;1H[K[36;1H:[?12l[?25hw wq[?25l[?12l[?25h[?25l[?1002l"taxi2.c" [도스] 33L, 1110C 저장 했습니다
+[39;49m[m[?1l>[?12l[?25h[?1049l[cc15:~/ch10/18061] excit[K[K[Kit
+exit
+
+Script done on 2023년 03월 28일 (화) 오후 10시 05분 25초

@@ -1,0 +1,5 @@
+정수(int)데이터를 주면 이에 해당하는 2진수를 출력하는 함수 
+void bitprint(int n); 을 작성하고 이를 이용하여 main에서는
+16진 정수를 읽어서 bitprint를 호출하여 출력하라.
+
+최초 마스크는 unsigned int mask = 0x80000000;

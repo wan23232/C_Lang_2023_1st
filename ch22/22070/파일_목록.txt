@@ -1,0 +1,8 @@
+제출 파일은 file_show.c 
+
+배포 파일: hello.txt
+배포파일 : hello.txt 다운로드 성공.
+문제파일은 문제설명_22070.txt 입니다.
+
+샘플 테스트 파일은 testdata1.txt 입니다.
+

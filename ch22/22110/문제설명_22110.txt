@@ -1,0 +1,23 @@
+<p>파일명: mycp.c</p>
+
+<p>(리눅스의 경우: gcc mycp.c &ndash;o mycp 로 컴파일한다. - <span style="color:#FF0000">윈도의 경우는 무시</span>)</p>
+
+<p>mycp는 파일명 2개를 argument로 받아서 첫째 인자가 가리키는 파일을 둘째 인자이름의 파일로 복사하는 프로그램이다. 예를 들면:</p>
+
+<p>$ mycp hello1.txt hello2.txt 이렇게 하면 hello1.txt 파일을 hello2.txt 파일로 복사한다.</p>
+
+<p>( 윈도에서는 c:\user\nobody\project5\debug\&gt; mycp.exe hello1.txt hello2.txt&nbsp; 처럼 사용 ) - <span style="color:#FF0000">오타 수정</span></p>
+
+<p>1: ac 가 3 인지 확인하여 아니면 사용법을 출력하고 종료</p>
+
+<p>맞으면:</p>
+
+<p>av[1] 를 파일명으로 open한다. (모드: &quot;r&quot; ,&nbsp; 변수명을&nbsp;ifp 라 하자) ,</p>
+
+<p>av[2] 를 파일명으로 &quot;w&quot;모드로 연다. ( ofp라 하자)</p>
+
+<p>ifp 에서 한글자씩(fgetc로) 읽어서 (EOF 전까지) ofp로 출력 (fputc)</p>
+
+<p>&nbsp;</p>
+
+<p>** Visual Studio에서 작성한 경우는 cmd 창을 열어서 해당 프로젝트의 exe파일이 생긴 곳 (대개 debug 폴더)으로 이동해서 mycp.exe hello1.txt hello2.txt 처럼 실행.</p>

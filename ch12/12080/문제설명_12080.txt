@@ -1,0 +1,2 @@
+printf("Hi\nHi\n"); 와 같은 효과를 내도록 하되 printf 를 쓰지 않고 
+putchar 만을 여러 번 써서 출력해보라.

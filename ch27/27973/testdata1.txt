@@ -1,0 +1,5 @@
+echo_of_mind  BillEvans 15000
+delta_world   Dave 19000
+beta_method   Tester 17000
+clever_mind   Clever_man 18000
+a_book_of_C   Charles 16000

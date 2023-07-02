@@ -1,0 +1,10 @@
+<p>함수 c2f 와 f2c 를 작성하라. 두 함수는 double 로 온도를 받고 double로 온도를 돌려주는 함수이다. c2f는 섭씨를 화씨로, f2c는 화씨를 섭씨로 환산하여 돌려준다.</p>
+
+<p><span style="color:#FF0000">main에서는 화씨 온도 하나, 섭씨 온도 하나 두개의 double 수를&nbsp;입력받고 &nbsp;섭씨와 화씨로 변환하여 출력한다.<br />
+(소수점 이하 1까지만 출력한다.)&nbsp;</span></p>
+
+<p><span style="color:rgb(255, 0, 0)">예시:&nbsp;</span></p>
+
+<p><span style="color:#FF0000">입력:&nbsp; 212&nbsp; &nbsp; 21 </span></p>
+
+<p><span style="color:#FF0000">출력:&nbsp; 100.0&nbsp; 69.8</span></p>

@@ -1,0 +1,6 @@
+배포 파일: printstring.c
+배포파일 : printstring.c 다운로드 성공.
+문제파일은 문제설명_17020.txt 입니다.
+
+샘플 테스트 파일은 testdata1.txt 입니다.
+

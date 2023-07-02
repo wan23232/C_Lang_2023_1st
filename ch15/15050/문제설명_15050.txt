@@ -1,0 +1,7 @@
+#include <stdio.h>
+// 한번 호출하면 "Hello\n"를 출력하는 함수 hello를 여기에 정의하라.
+
+int main(){
+    // 여기서 hello함수를 두번 호출한다.
+    
+}

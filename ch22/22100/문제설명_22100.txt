@@ -1,0 +1,11 @@
+파일명 argu.c
+명령 줄에서 받은 명령의 인자 수와 인자들을 화면에 출력하는 프로그램
+예: 
+
+[ca38] a.out red green blue
+총 argument는 4개
+argument 0: a.out
+argument 1: red
+argument 2: green
+argument 3: blue
+

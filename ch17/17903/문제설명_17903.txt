@@ -1,0 +1,14 @@
+주어진 스트링을 다른 스트링으로 복사하되, 원본에 콤마가 있으면
+사본에서는 콤마 뒤에 빈 칸을 넣는 함수 addspace를 작성한다.
+단, 현재 ,main에서는 100바이트로 테스트하지만, addspace함수는 스트링 길이에 제약을 받지 않아야한다.
+fgets 함수는 빈칸 포함해서 한 줄을 입력하는 함수인데, 뭔지 몰라도 상관 없다. 
+
+테스트:
+	char org[100], copy[100];
+	fgets(org, 100, stdin);
+	addspace(copy, org);
+	printf("원본: %s\n", org);
+	printf("결과: %s\n", copy);
+
+// 예를 들어 입력이  There are lies,damn lies,and statistics 였다면
+// 결과는  There are lies, damn lies, and statistics  가 된다.

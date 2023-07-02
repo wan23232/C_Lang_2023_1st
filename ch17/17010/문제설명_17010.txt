@@ -1,0 +1,11 @@
+char  msg1[] = { 'H', 'e', 'l', 'l', 'o' };
+char  msg2[] = { 'M', 'J', 'U' };
+
+이와 같은 문자열을 반복문을 이용하여 출력하는 함수 printStr(int length, char str[]) 을 만들고
+아래와 같이 호출하여 "Hello", "MJU"와 같은 모양으로 출력하게 하라. (따옴표는 출력 안함)
+단, 문자 출력을 위해서는 putchar를 사용한다. (printf를 사용하지 않는다.)
+
+printStr(5, msg1);
+putchar('\n');
+printStr(3, msg2);
+putchar('\n');

@@ -1,0 +1,10 @@
+다음의 프로그램을 수정하여 올바르게 만들어 실행하여보고 제출하라.
+출력은 
+겹따옴표는 " 입니다.
+처럼 나와야한다. 
+#include <stdio.h>
+int main( )
+{
+	// printf prints to the screen
+	printf('겹따옴표는 " 입니다.\n');
+}

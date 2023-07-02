@@ -1,0 +1,11 @@
+int  total_seconds, seconds, minutes;
+total_seconds = 129;
+
+위와 같은 경우에 129초가 몇분 몇초인지 (몫과 나머지 연산을 이용) 계산하여
+빈칸 혹은 줄 바꿈으로 구분하여 출력하라.
+(두 수가 붙어나오면 어느 부분이 몫인지 구분이 안되므로)
+
+total_seconds 의 값만 바꾸면 계산을 자동으로 되어야 한다.
+(따라서  minutes = 2; 처럼 쓰면 안된다. total_seconds 로부터 계산을 해야한다.)
+
+

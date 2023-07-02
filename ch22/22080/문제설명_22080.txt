@@ -1,0 +1,5 @@
+"out2" 파일을 "w" 모드로 연다음
+fputc 를 이용하여 'a', 'b', '\n' 세 글자를 파일에 write 해보라.
+c = 'a';
+fputc(c, fp);
+etc.

@@ -1,0 +1,9 @@
+하나의 스트링 뒤에 다른 스트링을 붙이는 함수 mystrcat 을 작성하여 아래와 같이 테스트하라.
+단 strcpy, strcat, strlen 등의 함수를 사용해서는 안된다.
+
+main:
+char str1[100];
+char str2[100];
+scanf("%s%s", str1, str2);   // hello world 를 입력했다면
+mystrcat(str1, str2);    // str1 은 helloworld 가 된다.
+printf("%s\n", str1);  

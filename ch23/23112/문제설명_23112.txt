@@ -1,0 +1,9 @@
+오목과 같은 게임에서 행 번호, 열번호 두개의 정수를 입력 받아올 수 있는
+함수를 작성하여 아래와 같이 테스트하라.
+함수의 프로토타입:
+ struct point getPoint(); 
+
+main:
+   p = getPoint();
+   printf("입력된 행: %d 열: %d\n", p.row, p.col);
+ 

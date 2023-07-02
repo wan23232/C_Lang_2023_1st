@@ -1,0 +1,5 @@
+주어진 프로그램에서 multi-line comment 를 
+모두 single-line comment로 바꾼다. 
+또, single-line comment는 multi-line comment (/* ... */) 으로 바꾼다.
+
+
